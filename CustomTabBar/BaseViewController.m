@@ -62,6 +62,8 @@
 
 -(void)addButtons {
     
+    UIImage *img = [UIImage imageNamed:@"clock@2x.png"];
+    
     for(int i =1;i<=7;i++) {
         UIButton *btn= [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake((i-1)*64, 0, 64, 40);
@@ -90,7 +92,7 @@
                 [btn setTitle:[NSString stringWithFormat:@"Tab-6"] forState:UIControlStateNormal];
                 break;
             case 7:
-                [btn setTitle:[NSString stringWithFormat:@"Tab-7"] forState:UIControlStateNormal];
+            	[self buttonLayout:btn withImage:img withText:@"Tab-7"];
                 break;
                 
             default:
@@ -103,7 +105,14 @@
     }
 }
 
+-(void) buttonLayout: (UIButton*)btn withImage:(UIImage *) img withText:(NSString *) buttonText
+{
+    btn.titleEdgeInsets = UIEdgeInsetsMake(-5.0, -img.size.width+4, -40.0, 0.0);
+    btn.imageEdgeInsets = UIEdgeInsetsMake(-10.0, (btn.bounds.size.width-img.size.width)/2, - 0.0, 0.0);
 
+    [btn setImage:img forState:UIControlStateNormal];
+    [btn setTitle:buttonText forState:UIControlStateNormal];
+}
 
 -(void)tabCall:(NSInteger)tag {
     switch (tag) {
